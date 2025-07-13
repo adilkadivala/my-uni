@@ -1,8 +1,11 @@
+import { BrowserRouter } from "react-router-dom";
+import Landing from "./pages/landing";
+
 function App() {
   return (
-    <div className="flex items-center justify-center w-screen h-screen">
-      <p className="text-rose-500">hello we have started</p>
-    </div>
+    <BrowserRouter>
+      <Landing />;
+    </BrowserRouter>
   );
 }
 

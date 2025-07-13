@@ -1,0 +1,58 @@
+import { BookOpen } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { ModeToggle } from "@/components/theme-toggle";
+
+const Navbar = () => {
+  return (
+    <header className="border-b">
+      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="flex items-center space-x-2">
+          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+            <BookOpen className="h-5 w-5 text-primary-foreground" />
+          </div>
+          <span className="text-xl font-bold">MyUni</span>
+        </div>
+
+        <nav className="hidden md:flex items-center space-x-6">
+          <Link
+            to="#features"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Features
+          </Link>
+          <Link
+            to="#about"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            About
+          </Link>
+          <Link
+            to="#contact"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Contact
+          </Link>
+          <Link
+            to="#privacy"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Privacy
+          </Link>
+        </nav>
+
+        <div className="flex items-center space-x-2">
+          <ModeToggle />
+          <Link to="/auth/signin">
+            <Button variant="ghost">Sign In</Button>
+          </Link>
+          <Link to="/auth/signup">
+            <Button>Get Started</Button>
+          </Link>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Navbar;
