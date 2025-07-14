@@ -1,10 +1,10 @@
 import { BrowserRouter } from "react-router-dom";
-import Landing from "./pages/landing";
+import Paths from "./routes/paths";
 
 function App() {
   return (
     <BrowserRouter>
-      <Landing />;
+      <Paths />
     </BrowserRouter>
   );
 }

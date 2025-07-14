@@ -11,7 +11,9 @@ const Navbar = () => {
           <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
             <BookOpen className="h-5 w-5 text-primary-foreground" />
           </div>
-          <span className="text-xl font-bold">MyUni</span>
+          <Link to="/" className="text-xl font-bold">
+            MyUni
+          </Link>
         </div>
 
         <nav className="hidden md:flex items-center space-x-6">
@@ -43,10 +45,10 @@ const Navbar = () => {
 
         <div className="flex items-center space-x-2">
           <ModeToggle />
-          <Link to="/auth/signin">
+          <Link to="/auth/sign-in">
             <Button variant="ghost">Sign In</Button>
           </Link>
-          <Link to="/auth/signup">
+          <Link to="/auth/sign-up">
             <Button>Get Started</Button>
           </Link>
         </div>
