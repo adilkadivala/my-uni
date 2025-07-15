@@ -1,7 +1,7 @@
 # 🎓 MyUni - University Management System
 
 <div align="center">
-  <img src="/logo.svg" alt="MyUni Logo" width="100" height="100" />
+  <img src="./client/public/logo.svg" alt="MyUni Logo" width="100" height="100" />
 
   <h3><strong>A comprehensive university management system built with React + Vite</strong></h3>
 

@@ -59,7 +59,7 @@ export default function SignIn() {
               placeholder="jhondow@1234"
             />
             <Button
-              className="text-sm absolute right-2 bottom-[5.5rem] md:bottom-10 p-0"
+              className="text-sm absolute right-2 top-8 p-0"
               onClick={handleVisibleToggle}
               variant="ghost"
               type="button"
@@ -77,7 +77,7 @@ export default function SignIn() {
                 >
                   Terms & conditions{" "}
                 </Link>
-                and will follow our {" "}
+                and will follow our{" "}
                 <Link
                   to="/privacy"
                   className="border-b border-primary dark:border-primary"

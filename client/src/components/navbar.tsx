@@ -1,7 +1,7 @@
 import { BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const Navbar = () => {
   return (
@@ -44,7 +44,7 @@ const Navbar = () => {
         </nav>
 
         <div className="flex items-center space-x-2">
-          <ThemeToggle />
+          <ModeToggle />
           <Link to="/auth/sign-in">
             <Button variant="ghost">Sign In</Button>
           </Link>
