@@ -14,13 +14,13 @@ const CTA = () => {
           MyUni to streamline their academic journey.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/auth/signup">
+          <Link to="/auth/sign-up">
             <Button size="lg" variant="secondary" className="w-full sm:w-auto">
               Get Started Today
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
-          <Link to="/auth/signin">
+          <Link to="/auth/sign-in">
             <Button
               size="lg"
               variant="outline"
