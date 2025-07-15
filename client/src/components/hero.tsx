@@ -16,13 +16,13 @@ const Hero = () => {
           empower your educational journey.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/auth/signup">
+          <Link to="/auth/sign-up">
             <Button size="lg" className="w-full sm:w-auto">
               Start Your Journey
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
-          <Link to="/auth/signin">
+          <Link to="/auth/sign-in">
             <Button variant="outline" size="lg" className="w-full sm:w-auto">
               Sign In to Continue
             </Button>

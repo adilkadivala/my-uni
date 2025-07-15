@@ -3,66 +3,111 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { BookOpen } from "lucide-react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function ForgotPassword() {
+export default function SignIn() {
+  const [step, setStep] = useState<"email" | "otp">("otp");
+
   return (
-    <Card className="w-full max-w-md">
-      <CardHeader className="text-center">
-        <CardTitle className="text-2xl">Reset Password</CardTitle>
-        <CardDescription>
-          As Our Future Plan, You are playing main Role! keep Rocking..
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="email">Email *</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="jhondow@gmail.com"
-              required
-            />
-          </div>
+    <div className="w-full md:w-[75%] borde flex flex-col min-h-full h-full">
+      <div>
+        <Link to="/" className="flex gap-2">
+          <BookOpen />
+          <span>My Uni</span>
+        </Link>
+      </div>
 
-          <Button type="submit" className="w-full">
-            Send OTP
-          </Button>
-        </form>
+      <div className="py-6 md:py-20 h-1/4 leading-10 tracking-wide">
+        <h1 className="text-3xl font-medium text-primary">Reset Password</h1>
+        <p className="text-neutral-500 dark:text-neutral-400">
+          {step === "email" ? (
+            <span>Please Enter Your Email</span>
+          ) : (
+            <span>
+              We have sent an OTP to your email{" "}
+              <span className="text-primary">johndow@gmail.com</span>
+            </span>
+          )}
+        </p>
+      </div>
+      <form className="h-2/4 flex items-center">
+        <div className="flex-1 flex flex-col gap-6">
+          {step === "email" ? (
+            <>
+              <div className="flex flex-col gap-3">
+                <Label>Email</Label>
+                <Input
+                  className="py-6 text-lg"
+                  type="email"
+                  placeholder="john@gmail.com"
+                />
+              </div>
+              <div className="flex flex-col gap-4">
+                <Button className="cursor-pointer rounded-sm py-6 font-bold">
+                  Send-OTP
+                </Button>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="flex flex-col gap-3">
+                <Label>OTP</Label>
+                <div className="flex w-full gap-1.5 ">
+                  <Input
+                    type="text"
+                    placeholder="4"
+                    className="text-center py-7 rounded-sm rounded-e-none"
+                  />
+                  <Input
+                    type="text"
+                    placeholder="4"
+                    className="text-center py-7 rounded-sm rounded-e-none"
+                  />
+                  <Input
+                    type="text"
+                    placeholder="4"
+                    className="text-center py-7 rounded-sm rounded-e-none"
+                  />
+                  <Input
+                    type="text"
+                    placeholder="4"
+                    className="text-center py-7 rounded-sm rounded-s-none"
+                  />
+                  <Input
+                    type="text"
+                    placeholder="4"
+                    className="text-center py-7 rounded-sm rounded-s-none"
+                  />
+                  <Input
+                    type="text"
+                    placeholder="4"
+                    className="text-center py-7 rounded-sm rounded-s-none"
+                  />
+                </div>
+              </div>
 
-        <form className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="otp">OTP</Label>
-            <Input id="otp" type="text" placeholder="358952" required />
-            <p className="text-sm text-muted-foreground">Demo OTP: 358952</p>
-          </div>
-
-          <Button type="submit" className="w-full">
-            Check
-          </Button>
-
-          <Button type="button" variant="outline" className="w-full">
-            Back to Email
-          </Button>
-        </form>
-
-        <div className="mt-4 text-center">
-          <Link
-            to="/auth/sign-in"
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Back to Sign In
-          </Link>
+              <div className="flex flex-col gap-4">
+                <Button className="cursor-pointer rounded-sm py-6 font-bold">
+                  Check
+                </Button>
+              </div>
+            </>
+          )}
         </div>
-      </CardContent>
-    </Card>
+      </form>
+      <div className="h-[10%] flex items-center md:mt-32">
+        <p>
+          Don't have an account ?{" "}
+          <Link to="/auth/sign-up">
+            <span className="border-b border-primary dark:border-primary">
+              Sing-up
+            </span>
+          </Link>
+        </p>
+      </div>
+    </div>
   );
 }
+9;

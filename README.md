@@ -53,23 +53,23 @@ npm install
 
 # 3. Start the dev server
 npm run dev
-````
+```
 
 Visit: [http://localhost:5173](http://localhost:5173)
 
 ---
 
-## 🧪 Default Credentials (For Testing)
+## 🧪 Default Credentials (For Testing, under development)
 
 ### 👨‍🎓 Student
 
-* Email: `student@myuni.edu` 
-* Password: `student123`
+- Email: `student@myuni.edu`
+- Password: `student123`
 
 ### 👨‍💼 Admin
 
-* Email: `admin@myuni.edu`
-* Password: `admin123`
+- Email: `admin@myuni.edu`
+- Password: `admin123`
 
 ---
 
@@ -114,17 +114,17 @@ myuni/
 
 ## 🔐 Authentication
 
-* Basic login authentication (username/password)
-* Role-based access (admin, student)
-* Protected routes (via context or middleware)
+- Basic login authentication (username/password)
+- Role-based access (admin, student)
+- Protected routes (via context or middleware)
 
 ---
 
 ## 🌙 Theme & Styling
 
-* Theme toggle (light/dark) via `shadcn/ui`
-* Typography: `Inter`, imported via Google Fonts
-* Fully responsive using Tailwind's mobile-first utilities
+- Theme toggle (light/dark) via `shadcn/ui`
+- Typography: `Inter`, imported via Google Fonts
+- Fully responsive using Tailwind's mobile-first utilities
 
 ---
 
@@ -142,10 +142,10 @@ Then open a **Pull Request**!
 
 ### Guidelines
 
-* Type-safe code (TypeScript)
-* Use Tailwind for styling
-* Follow component conventions (`shadcn/ui`)
-* Keep code readable and modular
+- Type-safe code (TypeScript)
+- Use Tailwind for styling
+- Follow component conventions (`shadcn/ui`)
+- Keep code readable and modular
 
 ---
 
@@ -155,15 +155,7 @@ This project is licensed under the **MIT License**. See [LICENSE](./LICENSE) for
 
 ---
 
-## 🙋 Support
-
-* 💌 Email: [support@myuni.edu](mailto:support@myuni.edu)
-* 📚 Docs: Coming Soon
-* 🐛 Report issues: [GitHub Issues](https://github.com/your-username/myuni/issues)
-
----
-
 <div align="center">
-  <strong>Made with ❤️ by Adil Kadival for future-ready universities</strong><br/>
+  <strong>Made with ❤️ </strong><br/>
   © 2024 MyUni. All rights reserved.
 </div>
