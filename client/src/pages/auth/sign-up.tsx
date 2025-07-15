@@ -59,7 +59,7 @@ export default function SignIn() {
               placeholder="jhondow@1234"
             />
             <Button
-              className="text-sm absolute right-2 bottom-11 p-0"
+              className="text-sm absolute right-2 bottom-[5.5rem] md:bottom-10 p-0"
               onClick={handleVisibleToggle}
               variant="ghost"
               type="button"
@@ -69,15 +69,15 @@ export default function SignIn() {
 
             <div className="flex items-center space-x-2">
               <Checkbox id="terms" />
-              <Label htmlFor="terms" className="text-sm leading-relaxed">
-                By clicking this You'll agree our
+              <Label htmlFor="terms" className="text-sm inline-block">
+                By clicking this You'll agree our{" "}
                 <Link
                   to="/terms"
                   className="border-b border-primary dark:border-primary"
                 >
-                  Terms & conditions
+                  Terms & conditions{" "}
                 </Link>
-                and will follow our
+                and will follow our {" "}
                 <Link
                   to="/privacy"
                   className="border-b border-primary dark:border-primary"
@@ -93,7 +93,10 @@ export default function SignIn() {
               Sign-In
             </Button>
             <span className="text-center">Or</span>
-            <Button variant="outline" className="cursor-pointer rounded-sm py-6 font-bold">
+            <Button
+              variant="outline"
+              className="cursor-pointer rounded-sm py-6 font-bold"
+            >
               Google
             </Button>
           </div>
@@ -104,7 +107,7 @@ export default function SignIn() {
           Already have an account ?{" "}
           <Link to="/auth/sign-in">
             <span className="border-b border-primary dark:border-primary">
-              Sing-in
+              Sign-in
             </span>
           </Link>
         </p>

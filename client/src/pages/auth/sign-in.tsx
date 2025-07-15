@@ -80,7 +80,7 @@ export default function SignIn() {
           Don't have an account ?{" "}
           <Link to="/auth/sign-up">
             <span className="border-b border-primary dark:border-primary">
-              Sing-up
+              Sign-up
             </span>
           </Link>
         </p>

@@ -157,5 +157,5 @@ This project is licensed under the **MIT License**. See [LICENSE](./LICENSE) for
 
 <div align="center">
   <strong>Made with ❤️ </strong><br/>
-  © 2024 MyUni. All rights reserved.
+  © 2025 MyUni. All rights reserved.
 </div>

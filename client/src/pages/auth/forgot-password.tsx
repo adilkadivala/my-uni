@@ -97,12 +97,12 @@ export default function SignIn() {
           )}
         </div>
       </form>
-      <div className="h-[10%] flex items-center md:mt-32">
+      <div className="h-[10%] mt-14 flex items-end md:mt-32">
         <p>
           Don't have an account ?{" "}
           <Link to="/auth/sign-up">
             <span className="border-b border-primary dark:border-primary">
-              Sing-up
+              Sign-up
             </span>
           </Link>
         </p>
