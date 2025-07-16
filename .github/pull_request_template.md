@@ -51,6 +51,4 @@ Closes #[issue-number]
 
 ---
 
-💬 **Let me know if you want any changes!**
-
 > Thanks for contributing to MyUni 🙌
