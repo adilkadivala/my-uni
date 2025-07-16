@@ -1,0 +1,34 @@
+name: 🔧 Build Check
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    name: 🧱 Build MyUni Frontend
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v3
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+          cache: 'pnpm'
+
+      - name: 📦 Installing Dependencies
+        run: pnpm install
+
+      - name: 🧪 Checking Types
+        run: pnpm type-check
+
+      - name: 🔍 Linting
+        run: pnpm lint
+
+      - name: 🛠️ Building
+        run: pnpm build
