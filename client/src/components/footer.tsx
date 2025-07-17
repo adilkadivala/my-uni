@@ -3,29 +3,31 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="border-t py-12 px-4">
-      <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <BookOpen className="h-5 w-5 text-primary-foreground" />
+    <footer className="border-t py-8 sm:py-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          <div className="sm:col-span-2 lg:col-span-1">
+            <div className="flex items-center space-x-2 mb-3 sm:mb-4">
+              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-primary rounded-lg flex items-center justify-center">
+                <BookOpen className="h-3 w-3 sm:h-5 sm:w-5 text-primary-foreground" />
               </div>
-              <span className="text-xl font-bold">MyUni</span>
+              <span className="text-lg sm:text-xl font-bold">MyUni</span>
             </div>
-            <p className="text-muted-foreground">
+            <p className="text-sm sm:text-base text-muted-foreground">
               Empowering education through innovative technology and seamless
               user experiences.
             </p>
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Product</h3>
+            <h3 className="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">
+              Product
+            </h3>
             <ul className="space-y-2 text-muted-foreground">
               <li>
                 <Link
                   to="#features"
-                  className="hover:text-foreground transition-colors"
+                  className="text-sm hover:text-foreground transition-colors"
                 >
                   Features
                 </Link>
@@ -33,7 +35,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="#"
-                  className="hover:text-foreground transition-colors"
+                  className="text-sm hover:text-foreground transition-colors"
                 >
                   Pricing
                 </Link>
@@ -41,7 +43,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="#"
-                  className="hover:text-foreground transition-colors"
+                  className="text-sm hover:text-foreground transition-colors"
                 >
                   Documentation
                 </Link>
@@ -50,12 +52,14 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Company</h3>
+            <h3 className="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">
+              Company
+            </h3>
             <ul className="space-y-2 text-muted-foreground">
               <li>
                 <Link
                   to="#about"
-                  className="hover:text-foreground transition-colors"
+                  className="text-sm hover:text-foreground transition-colors"
                 >
                   About
                 </Link>
@@ -63,7 +67,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="#contact"
-                  className="hover:text-foreground transition-colors"
+                  className="text-sm hover:text-foreground transition-colors"
                 >
                   Contact
                 </Link>
@@ -71,7 +75,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="#"
-                  className="hover:text-foreground transition-colors"
+                  className="text-sm hover:text-foreground transition-colors"
                 >
                   Careers
                 </Link>
@@ -80,12 +84,14 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Legal</h3>
+            <h3 className="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">
+              Legal
+            </h3>
             <ul className="space-y-2 text-muted-foreground">
               <li>
                 <Link
                   to="#privacy"
-                  className="hover:text-foreground transition-colors"
+                  className="text-sm hover:text-foreground transition-colors"
                 >
                   Privacy Policy
                 </Link>
@@ -93,7 +99,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="#"
-                  className="hover:text-foreground transition-colors"
+                  className="text-sm hover:text-foreground transition-colors"
                 >
                   Terms of Service
                 </Link>
@@ -101,7 +107,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="#"
-                  className="hover:text-foreground transition-colors"
+                  className="text-sm hover:text-foreground transition-colors"
                 >
                   Cookie Policy
                 </Link>
@@ -110,8 +116,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t mt-8 pt-8 text-center text-muted-foreground">
-          <p>&copy; 2025 MyUni. All rights reserved.</p>
+        <div className="border-t mt-6 sm:mt-8 pt-6 sm:pt-8 text-center text-xs sm:text-sm text-muted-foreground">
+          <p>&copy; {new Date().getFullYear()} MyUni. All rights reserved.</p>
         </div>
       </div>
     </footer>

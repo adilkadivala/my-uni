@@ -1,20 +1,22 @@
+import About from "@/components/about";
+import Campus from "@/components/campus";
 import CTA from "@/components/cta";
-import Features from "@/components/features";
 import Footer from "@/components/footer";
 import Hero from "@/components/hero";
 import Navbar from "@/components/navbar";
-import Status from "@/components/status";
+import Programs from "@/components/programs";
 
 const Landing = () => {
   return (
-    <>
+    <div className="min-h-screen bg-background">
       <Navbar />
       <Hero />
-      <Features />
-      <Status />
+      <About />
+      <Programs />
+      <Campus />
       <CTA />
       <Footer />
-    </>
+    </div>
   );
 };
 

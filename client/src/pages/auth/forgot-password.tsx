@@ -8,7 +8,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function SignIn() {
-  const [step, setStep] = useState<"email" | "otp">("otp");
+  const [step, setStep] = useState<"email" | "otp">("email");
 
   return (
     <div className="w-full md:w-[75%] borde flex flex-col min-h-full h-full">
@@ -45,7 +45,7 @@ export default function SignIn() {
                 />
               </div>
               <div className="flex flex-col gap-4">
-                <Button className="cursor-pointer rounded-sm py-6 font-bold">
+                <Button type="button" onClick={() => setStep("otp")}>
                   Send-OTP
                 </Button>
               </div>
@@ -110,4 +110,3 @@ export default function SignIn() {
     </div>
   );
 }
-9;
