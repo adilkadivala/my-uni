@@ -15,7 +15,7 @@ export default function SignIn() {
       <div>
         <Link to="/" className="flex gap-2">
           <BookOpen />
-          <span>My Uni</span>
+          <span className="font-bold">My Uni</span>
         </Link>
       </div>
 
@@ -45,7 +45,7 @@ export default function SignIn() {
                 />
               </div>
               <div className="flex flex-col gap-4">
-                <Button type="button" onClick={() => setStep("otp")}>
+                <Button type="button" className="py-6 cursor-pointer" onClick={() => setStep("otp")}>
                   Send-OTP
                 </Button>
               </div>
