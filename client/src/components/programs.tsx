@@ -7,6 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { Program1, Program2, Program3 } from "@/assets";
 
 const programs = [
@@ -14,8 +15,6 @@ const programs = [
     title: "Department of Economics",
     description:
       "Explore macroeconomics, microeconomics, and econometrics with real-world applications and research opportunities.",
-    badge: "Popular",
-    badgeVariant: "default",
     image: Program1,
   },
   {
@@ -40,18 +39,23 @@ const programs = [
     title: "Business Administration",
     description:
       "Learn management principles, leadership skills, and organizational strategy with hands-on projects.",
-    badge: "MBA",
-    badgeVariant: "default",
     image: Program3,
   },
   {
     title: "International and European Studies",
     description:
       "Understand global political systems, diplomacy, and international law with a focus on European affairs.",
-    badge: "New",
-    badgeVariant: "destructive",
     image: Program1,
   },
+];
+
+const spanStyles = [
+  "md:col-span-3", // 0
+  "md:col-span-3", // 1
+  "md:col-span-4", // 2
+  "md:col-span-2", // 3
+  "md:col-span-3", // 4
+  "md:col-span-3", // 5
 ];
 
 const Programs = () => {
@@ -68,33 +72,37 @@ const Programs = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8">
+        {/* Bento Grid */}
+        <div className="grid sm:grid-cols-2 md:grid-cols-6 gap-2">
           {programs.map((program, idx) => (
-            <Card key={idx} className="group hover:shadow-lg transition-shadow">
-              <CardHeader className="pb-4">
-                <img
-                  src={program.image}
-                  alt={program.title}
-                  className="w-full h-48 sm:h-52 object-cover rounded-lg mb-3 sm:mb-4"
-                />
-                <div className="flex items-center justify-between flex-wrap gap-2">
+            <div
+              key={program.title}
+              className={cn("p-1 rounded-lg", spanStyles[idx], "h-full")}
+            >
+              <Card className="group hover:shadow-lg transition-shadow h-full">
+                <CardHeader className="pb-4">
+                  <img
+                    src={program.image}
+                    alt={program.title}
+                    className="w-full h-40 sm:h-44 object-cover rounded-lg mb-3 sm:mb-4"
+                  />
                   <CardTitle className="text-lg sm:text-xl">
                     {program.title}
                   </CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="mb-4 text-sm sm:text-base">
-                  {program.description}
-                </CardDescription>
-                <Button
-                  variant="ghost"
-                  className="group-hover:text-primary w-full sm:w-auto text-sm"
-                >
-                  Learn More <ChevronRight className="ml-2 h-4 w-4" />
-                </Button>
-              </CardContent>
-            </Card>
+                </CardHeader>
+                <CardContent className="flex flex-col justify-between h-full">
+                  <CardDescription className="mb-4 text-sm sm:text-base">
+                    {program.description}
+                  </CardDescription>
+                  <Button
+                    variant="ghost"
+                    className="group-hover:text-primary w-full sm:w-auto text-sm"
+                  >
+                    Learn More <ChevronRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
           ))}
         </div>
       </div>

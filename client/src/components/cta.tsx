@@ -29,7 +29,7 @@ const CTA = () => {
             <Button
               size="lg"
               variant="outline"
-              className="text-sm sm:text-base lg:text-lg px-6 sm:px-8 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary bg-transparent w-full sm:w-auto"
+              className="text-sm sm:text-base lg:text-lg px-6 sm:px-8 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary dark:hover:bg-primary-foreground dark:hover:text-primary bg-transparent w-full sm:w-auto"
             >
               Schedule a Visit
             </Button>
