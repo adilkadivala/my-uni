@@ -9,7 +9,12 @@ import {
 
 import { motion } from "motion/react";
 
-const cardData = [
+type CardData = {
+  title: string;
+  description: string;
+};
+
+const cardData: CardData[] = [
   {
     title: "World-Class Faculty",
     description:

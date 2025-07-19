@@ -10,7 +10,13 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Program1, Program2, Program3 } from "@/assets";
 
-const programs = [
+type Program = {
+  title: string;
+  description: string;
+  image: string;
+};
+
+const programs: Program[] = [
   {
     title: "Department of Economics",
     description:

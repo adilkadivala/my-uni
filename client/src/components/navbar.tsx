@@ -6,6 +6,30 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+type NavItems = {
+  href: string;
+  title: string;
+};
+
+const navItems: NavItems[] = [
+  {
+    href: "#about",
+    title: "About",
+  },
+  {
+    href: "#programs",
+    title: "Programs",
+  },
+  {
+    href: "#campus",
+    title: "Campus",
+  },
+  {
+    href: "#admissions",
+    title: "Admissions",
+  },
+];
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -20,30 +44,14 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-6">
-            <a
-              href="#about"
-              className="text-sm font-medium hover:text-primary transition-colors"
-            >
-              About
-            </a>
-            <a
-              href="#programs"
-              className="text-sm font-medium hover:text-primary transition-colors"
-            >
-              Programs
-            </a>
-            <a
-              href="#campus"
-              className="text-sm font-medium hover:text-primary transition-colors"
-            >
-              Campus Life
-            </a>
-            <a
-              href="#admissions"
-              className="text-sm font-medium hover:text-primary transition-colors"
-            >
-              Admissions
-            </a>
+            {navItems?.map((item) => (
+              <a
+                href={item.href}
+                className="text-sm font-medium hover:text-primary transition-colors"
+              >
+                {item.title}
+              </a>
+            ))}
           </nav>
 
           {/* Desktop Actions */}
@@ -87,34 +95,14 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="lg:hidden border-t bg-background/95 backdrop-blur">
             <nav className="flex flex-col space-y-4 px-4 py-6">
-              <a
-                href="#about"
-                className="text-sm font-medium hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About
-              </a>
-              <a
-                href="#programs"
-                className="text-sm font-medium hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Programs
-              </a>
-              <a
-                href="#campus"
-                className="text-sm font-medium hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Campus Life
-              </a>
-              <a
-                href="#admissions"
-                className="text-sm font-medium hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Admissions
-              </a>
+              {navItems?.map((item) => (
+                <a
+                  href={item.href}
+                  className="text-sm font-medium hover:text-primary transition-colors"
+                >
+                  {item.title}
+                </a>
+              ))}
 
               <div className="flex flex-col space-y-3 pt-4 border-t">
                 <Button variant="ghost" size="sm" className="justify-start">

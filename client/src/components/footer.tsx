@@ -1,6 +1,30 @@
 import { BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
 
+type SectionsItem = {
+  href: string;
+  title: string;
+};
+
+const Sectionsitem: SectionsItem[] = [
+  {
+    href: "#about",
+    title: "About",
+  },
+  {
+    href: "#programs",
+    title: "Programs",
+  },
+  {
+    href: "#campus",
+    title: "Campus",
+  },
+  {
+    href: "#admissions",
+    title: "Admissions",
+  },
+];
+
 const Footer = () => {
   return (
     <footer className="border-t py-8 sm:py-12">
@@ -21,39 +45,25 @@ const Footer = () => {
 
           <div>
             <h3 className="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">
-              Product
+              Sections
             </h3>
             <ul className="space-y-2 text-muted-foreground">
-              <li>
-                <Link
-                  to="#features"
-                  className="text-sm hover:text-foreground transition-colors"
-                >
-                  Features
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="#"
-                  className="text-sm hover:text-foreground transition-colors"
-                >
-                  Pricing
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="#"
-                  className="text-sm hover:text-foreground transition-colors"
-                >
-                  Documentation
-                </Link>
-              </li>
+              {Sectionsitem?.map((item) => (
+                <li>
+                  <Link
+                    to={item.href}
+                    className="text-sm hover:text-foreground transition-colors"
+                  >
+                    {item.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div>
             <h3 className="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">
-              Company
+              Portal
             </h3>
             <ul className="space-y-2 text-muted-foreground">
               <li>
@@ -61,23 +71,7 @@ const Footer = () => {
                   to="#about"
                   className="text-sm hover:text-foreground transition-colors"
                 >
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="#contact"
-                  className="text-sm hover:text-foreground transition-colors"
-                >
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="#"
-                  className="text-sm hover:text-foreground transition-colors"
-                >
-                  Careers
+                  Student Portal
                 </Link>
               </li>
             </ul>
