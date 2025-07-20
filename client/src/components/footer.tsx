@@ -50,12 +50,12 @@ const Footer = () => {
             <ul className="space-y-2 text-muted-foreground">
               {Sectionsitem?.map((item) => (
                 <li>
-                  <Link
-                    to={item.href}
+                  <a
+                    href={item.href}
                     className="text-sm hover:text-foreground transition-colors"
                   >
                     {item.title}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>

@@ -24,16 +24,16 @@ jobs:
       - name: 💿 Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 10.x
 
       - name: 📦 Installing Dependencies
         run: pnpm install
 
       - name: 🧪 Checking Types
-        run: pnpm type-check
+        run: pnpm run type-check
 
       - name: 🔍 Linting
         run: pnpm lint
 
       - name: 🛠️ Building
-        run: pnpm build
+        run: pnpm run build
