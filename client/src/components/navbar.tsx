@@ -37,10 +37,10 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <div className="flex items-center space-x-2">
+          <a href="/" className="flex items-center space-x-2">
             <BookOpen className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
             <span className="text-lg sm:text-2xl font-bold">My-Uni</span>
-          </div>
+          </a>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-6">
@@ -61,8 +61,9 @@ const Navbar = () => {
               variant="ghost"
               size="sm"
               className="hidden lg:inline-flex text-xs lg:text-sm"
+              asChild
             >
-              Student Portal
+              <Link to="/student/dashboard">Student Portal</Link>
             </Button>
             <Button
               size="sm"
@@ -75,7 +76,6 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <div className="flex items-center space-x-2 md:hidden">
-            <ModeToggle />
             <Button
               variant="ghost"
               size="sm"
