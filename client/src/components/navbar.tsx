@@ -47,6 +47,7 @@ const Navbar = () => {
             {navItems?.map((item) => (
               <a
                 href={item.href}
+                key={item.href}
                 className="text-sm font-medium hover:text-primary transition-colors"
               >
                 {item.title}
@@ -98,6 +99,7 @@ const Navbar = () => {
               {navItems?.map((item) => (
                 <a
                   href={item.href}
+                  key={item.href}
                   className="text-sm font-medium hover:text-primary transition-colors"
                 >
                   {item.title}

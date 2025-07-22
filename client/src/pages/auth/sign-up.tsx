@@ -7,13 +7,57 @@ import { Label } from "@/components/ui/label";
 import { BookOpen, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { toast } from "sonner";
+import { handleVisibleToggle, InputHandler } from "@/lib/utils";
+
+interface UserData {
+  firstname?: string;
+  lastname?: string;
+  email?: string;
+  password?: string;
+}
+
+const server_base_api = import.meta.env.VITE_SERVER_BASE_URL;
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [userData, setUserData] = useState<UserData>({
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+  });
 
-  function handleVisibleToggle() {
-    setShowPassword(!showPassword);
-  }
+  // handle for password visible icon
+
+  // form-handler
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      const response = await axios.post(
+        `${server_base_api}/api/v1/sign-up`,
+        userData
+      );
+      if (response.status === 200) {
+        setIsLoading(false);
+        setUserData({
+          firstname: "",
+          lastname: "",
+          email: "",
+          password: "",
+        });
+        toast.success("account created!!");
+      }
+    } catch (error: any) {
+      setIsLoading(false);
+      console.log(error.message);
+      toast.error("Sorry__ we are facing server error");
+    }
+  };
 
   return (
     <div className="w-full md:w-[75%] borde flex flex-col min-h-full h-full">
@@ -30,37 +74,57 @@ export default function SignIn() {
           Please Enter Your Details
         </p>
       </div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-6">
           <div className="flex w-full gap-2">
             <div className="flex flex-col gap-3 w-1/2">
-              <Label>First Name</Label>
-              <Input className="py-6 text-lg" type="text" placeholder="john" />
+              <Label id="firstname">First Name</Label>
+              <Input
+                className="py-6 text-lg"
+                type="text"
+                placeholder="john"
+                name="firstname"
+                value={userData?.firstname}
+                onChange={(e) => InputHandler(e, setUserData)}
+              />
             </div>
             <div className="flex flex-col gap-3 w-1/2">
-              <Label>Last Name</Label>
-              <Input className="py-6 text-lg" type="text" placeholder="dow" />
+              <Label id="lastname">Last Name</Label>
+              <Input
+                className="py-6 text-lg"
+                type="text"
+                placeholder="dow"
+                name="lastname"
+                value={userData?.lastname}
+                onChange={(e) => InputHandler(e, setUserData)}
+              />
             </div>
           </div>
 
           <div className="flex flex-col gap-3">
-            <Label>Email</Label>
+            <Label id="email">Email</Label>
             <Input
               className="py-6 text-lg"
               type="email"
               placeholder="johndow@gmail.com"
+              name="email"
+              value={userData?.email}
+              onChange={(e) => InputHandler(e, setUserData)}
             />
           </div>
           <div className="flex flex-col gap-3 relative">
-            <Label>Password</Label>
+            <Label id="password">Password</Label>
             <Input
               className="py-6"
               type={showPassword ? "text" : "password"}
               placeholder="jhondow@1234"
+              name="password"
+              value={userData?.password}
+              onChange={(e) => InputHandler(e, setUserData)}
             />
             <Button
               className="text-sm absolute right-2 top-8 p-0"
-              onClick={handleVisibleToggle}
+              onClick={() => handleVisibleToggle(setShowPassword)}
               variant="ghost"
               type="button"
             >
@@ -90,7 +154,7 @@ export default function SignIn() {
           </div>
           <div className="flex flex-col gap-4 my-10">
             <Button className="cursor-pointer rounded-sm py-6 font-bold">
-              Sign-In
+              {isLoading ? "Loading" : "Sign-Up"}
             </Button>
             <span className="text-center">Or</span>
             <Button
