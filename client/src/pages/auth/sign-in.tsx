@@ -3,16 +3,62 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { BookOpen, Eye, EyeOff } from "lucide-react";
+import { handleVisibleToggle, InputHandler } from "@/lib/utils";
+import axios from "axios";
+import { BookOpen, Eye, EyeOff, RotateCw } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
+
+interface UserData {
+  email?: string;
+  password?: string;
+}
+
+const server_base_api = import.meta.env.VITE_SERVER_BASE_URL;
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [userData, setUserData] = useState<UserData>({
+    email: "",
+    password: "",
+  });
 
-  function handleVisibleToggle() {
-    setShowPassword(!showPassword);
-  }
+  // form-handler
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const response = await axios.post(
+        `${server_base_api}/api/v1/sign-in`,
+        userData,
+        {
+          withCredentials: true,
+        }
+      );
+      if (response.status === 200) {
+        setIsLoading(false);
+
+        setUserData({
+          email: "",
+          password: "",
+        });
+        toast.success("credentials matched!!");
+      } else if (response.status === 401) {
+        toast.error("User not Found !");
+      } else if (response.status === 402) {
+        toast.error("invalid credentials !");
+      }
+    } catch (error: any) {
+      setIsLoading(false);
+
+      console.log(error.message);
+      toast.error("Sorry__ we are facing server error");
+    }
+  };
 
   return (
     <div className="w-full md:w-[75%] borde flex flex-col min-h-full">
@@ -29,26 +75,32 @@ export default function SignIn() {
           Please Enter Your Details
         </p>
       </div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-3">
-            <Label>Email</Label>
+            <Label id="email">Email</Label>
             <Input
               className="py-6 text-lg"
               type="email"
+              name="email"
+              value={userData?.email}
+              onChange={(e) => InputHandler(e, setUserData)}
               placeholder="johndow@gmail.com"
             />
           </div>
           <div className="flex flex-col gap-3 relative">
-            <Label>Password</Label>
+            <Label id="password">Password</Label>
             <Input
               className="py-6"
+              name="password"
+              value={userData?.password}
+              onChange={(e) => InputHandler(e, setUserData)}
               type={showPassword ? "text" : "password"}
               placeholder="jhondow@1234"
             />
             <Button
               className="text-sm absolute right-2 bottom-5 p-0"
-              onClick={handleVisibleToggle}
+              onClick={() => handleVisibleToggle(setShowPassword)}
               variant="ghost"
               type="button"
             >
@@ -63,7 +115,8 @@ export default function SignIn() {
           </div>
           <div className="flex flex-col gap-4 my-10">
             <Button className="cursor-pointer rounded-sm py-6 font-bold">
-              Sign-In
+              {isLoading ? "Loading" : "Sign in"}
+              {isLoading && <RotateCw className="animate-circle" />}
             </Button>
             <span className="text-center">Or</span>
             <Button

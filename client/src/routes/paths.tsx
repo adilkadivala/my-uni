@@ -14,6 +14,7 @@ import { FreshmenGuide } from "@/pages/students/freshman";
 import { Services } from "@/pages/students/services";
 import { Map } from "@/pages/students/map";
 import { Setting } from "@/pages/students/settings";
+import VerifyUser from "@/pages/auth/verify-user";
 
 const Paths = () => {
   return (
@@ -23,6 +24,7 @@ const Paths = () => {
         <Route path="sign-in" element={<SignIn />} />
         <Route path="sign-up" element={<SignUp />} />
         <Route path="forgot-password" element={<ForgotPassword />} />
+        <Route path="verify-user" element={<VerifyUser />} />
       </Route>
       <Route path="/student" element={<StudentDashboardLayout />}>
         <Route path="dashboard" element={<Dashboard />} />
