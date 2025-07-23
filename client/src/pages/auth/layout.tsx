@@ -6,7 +6,7 @@ const AuthLayout = () => {
       <div className="flex justify-center md:w-1/2 bg-gradient-to-br from-blue-200 via-purple-200 to-pink-200 items-end p-12">
         <div className="text-gray-800 text-center">
           <h2 className="text-2xl font-medium leading-relaxed">
-            Let's build something incredible —together.
+            Welcome To Place Where Possibilities Begin
           </h2>
         </div>
       </div>

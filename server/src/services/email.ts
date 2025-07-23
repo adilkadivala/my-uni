@@ -23,7 +23,7 @@ async function sendEmailOTP(to: string, otp: number) {
     from: `"OTP Service" <${process.env.EMAIL_USER}>`,
     to,
     subject: "Your OTP Code",
-    text: `Your OTP code is ${otp}. It is valid for 5 minutes.`,
+    text: `Your OTP code is ${otp}.`,
   };
 
   return transporter.sendMail(mailOptions);

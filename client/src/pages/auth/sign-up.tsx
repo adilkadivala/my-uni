@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
@@ -23,6 +21,8 @@ const server_base_api = import.meta.env.VITE_SERVER_BASE_URL;
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<UserData>({});
+  const [isUserAgreed, setIsUserAgreed] = useState<boolean>(false);
   const [userData, setUserData] = useState<UserData>({
     firstname: "",
     lastname: "",
@@ -30,10 +30,7 @@ export default function SignIn() {
     password: "",
   });
 
-  // handle for password visible icon
-
   // form-handler
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -54,7 +51,31 @@ export default function SignIn() {
       }
     } catch (error: any) {
       setIsLoading(false);
-      console.log(error.message);
+
+      if (error?.response?.status === 403) {
+        const errorMessage = error?.response.data?.details;
+
+        const errorInInput: UserData = {};
+
+        errorMessage?.forEach((error: any) => {
+          const field = error.field as keyof UserData;
+          errorInInput[field] = error.message;
+        });
+
+        setError(errorInInput);
+
+        // clear error
+        setTimeout(() => {
+          setError({});
+        }, 2000);
+
+        return;
+      }
+      if (error?.response?.status === 406) {
+        const errorMessage = error?.response.data?.error;
+        toast.error(errorMessage);
+        return;
+      }
       toast.error("Sorry__ we are facing server error");
     }
   };
@@ -87,6 +108,9 @@ export default function SignIn() {
                 value={userData?.firstname}
                 onChange={(e) => InputHandler(e, setUserData)}
               />
+              {error?.firstname && (
+                <span className="text-rose-500">{error.firstname}</span>
+              )}
             </div>
             <div className="flex flex-col gap-3 w-1/2">
               <Label id="lastname">Last Name</Label>
@@ -98,6 +122,9 @@ export default function SignIn() {
                 value={userData?.lastname}
                 onChange={(e) => InputHandler(e, setUserData)}
               />
+              {error?.lastname && (
+                <span className="text-rose-500">{error.lastname}</span>
+              )}{" "}
             </div>
           </div>
 
@@ -111,6 +138,9 @@ export default function SignIn() {
               value={userData?.email}
               onChange={(e) => InputHandler(e, setUserData)}
             />
+            {error?.email && (
+              <span className="text-rose-500">{error.email}</span>
+            )}{" "}
           </div>
           <div className="flex flex-col gap-3 relative">
             <Label id="password">Password</Label>
@@ -122,6 +152,9 @@ export default function SignIn() {
               value={userData?.password}
               onChange={(e) => InputHandler(e, setUserData)}
             />
+            {error?.password && (
+              <span className="text-rose-500">{error.password}</span>
+            )}
             <Button
               className="text-sm absolute right-2 top-8 p-0"
               onClick={() => handleVisibleToggle(setShowPassword)}
@@ -132,7 +165,11 @@ export default function SignIn() {
             </Button>
 
             <div className="flex items-center space-x-2">
-              <Checkbox id="terms" />
+              <Checkbox
+                id="terms"
+                checked={isUserAgreed}
+                onCheckedChange={(checked) => setIsUserAgreed(checked === true)}
+              />
               <Label htmlFor="terms" className="text-sm inline-block">
                 By clicking this You'll agree our{" "}
                 <Link
@@ -153,7 +190,10 @@ export default function SignIn() {
             </div>
           </div>
           <div className="flex flex-col gap-4 my-10">
-            <Button className="cursor-pointer rounded-sm py-6 font-bold">
+            <Button
+              className="cursor-pointer rounded-sm py-6 font-bold"
+              disabled={!isUserAgreed || isLoading}
+            >
               {isLoading ? "Loading" : "Sign-Up"}
             </Button>
             <span className="text-center">Or</span>

@@ -22,3 +22,4 @@ export function InputHandler(
 export function handleVisibleToggle(setState: any) {
   setState((prev: any) => !prev);
 }
+

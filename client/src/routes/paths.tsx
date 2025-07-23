@@ -14,7 +14,8 @@ import { FreshmenGuide } from "@/pages/students/freshman";
 import { Services } from "@/pages/students/services";
 import { Map } from "@/pages/students/map";
 import { Setting } from "@/pages/students/settings";
-import VerifyUser from "@/pages/auth/verify-user";
+import VerifyOTP from "@/pages/auth/verify-otp";
+import VerifyLayout from "@/pages/auth/verify-layout";
 
 const Paths = () => {
   return (
@@ -23,8 +24,10 @@ const Paths = () => {
       <Route path="/auth" element={<AuthLayout />}>
         <Route path="sign-in" element={<SignIn />} />
         <Route path="sign-up" element={<SignUp />} />
-        <Route path="forgot-password" element={<ForgotPassword />} />
-        <Route path="verify-user" element={<VerifyUser />} />
+        <Route path="verify" element={<VerifyLayout />}>
+          <Route path="otp" element={<VerifyOTP />} />
+          <Route path="forgot-password" element={<ForgotPassword />} />
+        </Route>
       </Route>
       <Route path="/student" element={<StudentDashboardLayout />}>
         <Route path="dashboard" element={<Dashboard />} />
