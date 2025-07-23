@@ -9,7 +9,7 @@ export const verifiedSignUpField = z.object({
     .string()
     .min(3, { message: "last name atleast should be 3 char." })
     .max(10, { message: "last name should not long then 10 char." }),
-  email: z.email(),
+  email: z.email({ message: "Please enter a valid email address" }),
   password: z
     .string()
     .min(5, { message: "password atleast should long then 5 char." })
@@ -28,7 +28,10 @@ export const verifiedForgotPassword = verifiedSignUpField.pick({
 });
 
 export const verifiedOTP = z.object({
-  otp: z.string().length(6, { message: "OTP must be 6 digits" }),
+  otp: z
+    .number()
+    .min(100000, { message: "OTP must be 6 digits" })
+    .max(999999, { message: "OTP must be 6 digits" }),
 });
 
 type SignUpFileds = z.infer<typeof verifiedSignUpField>;

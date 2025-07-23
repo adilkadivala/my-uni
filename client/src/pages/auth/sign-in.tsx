@@ -20,6 +20,7 @@ const server_base_api = import.meta.env.VITE_SERVER_BASE_URL;
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<UserData>({});
   const [userData, setUserData] = useState<UserData>({
     email: "",
     password: "",
@@ -47,15 +48,40 @@ export default function SignIn() {
           password: "",
         });
         toast.success("credentials matched!!");
-      } else if (response.status === 401) {
-        toast.error("User not Found !");
-      } else if (response.status === 402) {
-        toast.error("invalid credentials !");
+        return;
       }
     } catch (error: any) {
       setIsLoading(false);
 
-      console.log(error.message);
+      if (error?.response?.status === 403) {
+        const errorMessage = error?.response.data?.details;
+
+        const errorInInput: UserData = {};
+
+        errorMessage?.forEach((error: any) => {
+          const field = error.field as keyof UserData;
+          errorInInput[field] = error.message;
+        });
+
+        setError(errorInInput);
+
+        // clear error
+        setTimeout(() => {
+          setError({});
+        }, 2000);
+
+        return;
+      }
+      if (error?.response?.status === 401) {
+        const errorMessage = error?.response.data?.message;
+        toast.error(errorMessage);
+        return;
+      }
+      if (error?.response?.status === 402) {
+        const errorMessage = error?.response.data?.message;
+        toast.error(errorMessage);
+        return;
+      }
       toast.error("Sorry__ we are facing server error");
     }
   };
@@ -87,6 +113,9 @@ export default function SignIn() {
               onChange={(e) => InputHandler(e, setUserData)}
               placeholder="johndow@gmail.com"
             />
+            {error?.email && (
+              <span className="text-rose-500">{error.email}</span>
+            )}
           </div>
           <div className="flex flex-col gap-3 relative">
             <Label id="password">Password</Label>
@@ -107,11 +136,15 @@ export default function SignIn() {
               {showPassword ? <Eye /> : <EyeOff />}
             </Button>
 
-            <Link to="/auth/forgot-password">
+            <Link to="/auth/verify/forgot-password">
               <span className="absolute right-0 -bottom-6 border-b border-primary dark:border-primary">
                 forgot password ?
               </span>
             </Link>
+
+            {error?.password && (
+              <span className="text-rose-500">{error.password}</span>
+            )}
           </div>
           <div className="flex flex-col gap-4 my-10">
             <Button className="cursor-pointer rounded-sm py-6 font-bold">
