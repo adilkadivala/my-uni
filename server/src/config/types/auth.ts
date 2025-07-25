@@ -27,14 +27,24 @@ export const verifiedForgotPassword = verifiedSignUpField.pick({
   email: true,
 });
 
-export const verifiedOTP = z.object({
-  otp: z
-    .number()
-    .min(100000, { message: "OTP must be 6 digits" })
-    .max(999999, { message: "OTP must be 6 digits" }),
+export const verifiedOTP = verifiedSignUpField
+  .pick({
+    email: true,
+  })
+  .extend({
+    otp: z
+      .number()
+      .min(100000, { message: "OTP must be 6 digits" })
+      .max(999999, { message: "OTP must be 6 digits" }),
+  });
+
+export const verifyPassword = verifiedSignUpField.pick({
+  email:true,
+  password: true,
 });
 
 type SignUpFileds = z.infer<typeof verifiedSignUpField>;
 type SignInFileds = z.infer<typeof verifiedSignInField>;
 type ForgotPasswordFileds = z.infer<typeof verifiedForgotPassword>;
+type updatePassword = z.infer<typeof verifyPassword>;
 type OTPFileds = z.infer<typeof verifiedOTP>;

@@ -11,11 +11,16 @@ async function setOTP(email: string, otp: number) {
   await sendEmailOTP(email, otp);
 }
 
-async function verifyOTP(otp: number) {
-  const data = otpStore.get(otp);
+async function verifyOTP(email: string, otp: number) {
+  const data = otpStore.get(email);
 
-  if (data.otp !== otp) {
+  if (!data || data.otp !== otp) {
     return { status: 402, message: "Invalid OTP" };
+  }
+
+  const expiresIn = 5 * 60 * 1000;
+  if (Date.now() - data.createdAt > expiresIn) {
+    return { status: 403, message: "OTP expired" };
   }
 
   return { status: 200, message: "OTP verified" };

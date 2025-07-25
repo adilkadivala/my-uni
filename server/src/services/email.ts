@@ -12,7 +12,7 @@ async function WelcomeEmail(to: string, name: string) {
   const mailOptions = {
     from: `"Your most Welcome" <${process.env.EMAIL_USER}>`,
     to,
-    subject: "Hey !! WELCOME",
+    subject: "WELCOME !! to my-uni",
     text: `hey ${name}, Welcome to my uni !! we honored to having you !!`,
   };
 
@@ -23,7 +23,7 @@ async function sendEmailOTP(to: string, otp: number) {
     from: `"OTP Service" <${process.env.EMAIL_USER}>`,
     to,
     subject: "Your OTP Code",
-    text: `Your OTP code is ${otp}.`,
+    text: `Your OTP code is ${otp}.   OTP will expire in 5 minutes`,
   };
 
   return transporter.sendMail(mailOptions);

@@ -1,4 +1,6 @@
 import express from "express";
+import { Request, Response } from "express";
+
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { config } from "dotenv";
@@ -11,7 +13,7 @@ const client_Origin = process.env.CLIENT_ORIGIN;
 const app = express();
 
 const corsOptions = {
-  methods: ["Get", "Put", "Post", "Delete"],
+  methods: ["GET", "PUT", "POST", "DELETE"],
   origin: client_Origin,
   credentials: true,
 };
@@ -20,6 +22,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors(corsOptions));
 app.use(auth_endpoint);
+
+app.get("/", (req: Request, res: Response) => {
+  res.send("welcome to my uni-server");
+});
 
 app.listen(server_port, () => {
   console.log(`server is running at http://localhost:${server_port}`);
