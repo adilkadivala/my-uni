@@ -5,10 +5,11 @@ import {
   verifiedOTP,
   verifiedSignInField,
   verifiedSignUpField,
+  verifyPassword,
 } from "../../config/types/auth";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { sendEmailOTP, WelcomeEmail } from "../../services/email";
+import { WelcomeEmail } from "../../services/email";
 import { generateOTP, setOTP, verifyOTP } from "../../services/OTP";
 
 const jwt_secret = process.env.JWT_SECRET;
@@ -36,8 +37,8 @@ const signUp = async (req: Request, res: Response) => {
 
     const { firstname, lastname, email, password } = verifiedFields?.data;
 
-    const userEntry = await client.user.findFirst({ where: { email } });
-    if (userEntry) {
+    const createUser = await client.user.findFirst({ where: { email } });
+    if (createUser) {
       res.status(406).json({ error: "email already exist" });
       return;
     }
@@ -84,7 +85,6 @@ const signIn = async (req: Request, res: Response) => {
     }
 
     const { email, password } = req.body;
-    console.log(req.body);
     const user = await client.user.findFirst({ where: { email } });
 
     if (!user) {
@@ -159,11 +159,12 @@ const forgotPassword = async (req: Request, res: Response) => {
 
 // ---- || ----- ////
 
-// update password
+// verify user
 
 const compairOTP = async (req: Request, res: Response) => {
   try {
     const verifiedField = verifiedOTP.safeParse(req.body);
+
     const { success, error } = verifiedField;
     if (!success) {
       const formattedErrors = error?.issues.map((issue) => ({
@@ -177,15 +178,70 @@ const compairOTP = async (req: Request, res: Response) => {
       return;
     }
 
-    const { otp } = verifiedField.data;
+    const { otp, email } = verifiedField.data;
 
-    const isOTPCorrect = await verifyOTP(otp);
-    console.log(isOTPCorrect);
-    res.json(isOTPCorrect);
-    
+    const result = await verifyOTP(email, otp);
+
+    if (result.status === 200) {
+      await client.user.update({
+        where: { email },
+        data: { isVerified: true },
+      });
+
+      res.status(result.status).json({ message: result.message });
+
+      return;
+    }
   } catch (error: any) {
     console.log(error.message);
   }
 };
 
-export { signUp, signIn, forgotPassword, compairOTP };
+// ---- || ----- ////
+
+// update-password
+
+const updateUserPassword = async (req: Request, res: Response) => {
+  try {
+    const verifiedFields = verifyPassword.safeParse(req.body);
+
+    const { success, error } = verifiedFields;
+
+    if (!success) {
+      const formattedErrors = error?.issues.map((issue) => ({
+        field: issue.path[0],
+        message: issue.message,
+      }));
+
+      res
+        .status(403)
+        .json({ error: "Validation failed", details: formattedErrors });
+      return;
+    }
+
+    const { email, password } = verifiedFields?.data;
+
+    const hashedPassword = await bcrypt.hash(password, 7);
+
+    await client.user.update({
+      where: { email },
+      data: { password: hashedPassword },
+    });
+
+    res.status(200).json({ message: "profile updated successfully" });
+    return;
+  } catch (error: any) {
+    console.log(error.message);
+  }
+};
+
+// ---- || ----- ////
+
+// logout
+
+const logOut = async (req: Request, res: Response) => {
+  try {
+  } catch (error) {}
+};
+
+export { signUp, signIn, forgotPassword, compairOTP, updateUserPassword };

@@ -2,12 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { BookOpen, Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
 import { handleVisibleToggle, InputHandler } from "@/lib/utils";
+import AuthHeader from "@/components/auth-header";
+import AuthFooter from "@/components/auth-footer";
 
 interface UserData {
   firstname?: string;
@@ -82,19 +84,11 @@ export default function SignIn() {
 
   return (
     <div className="w-full md:w-[75%] borde flex flex-col min-h-full h-full">
-      <div className="h-1/4">
-        <Link to="/" className="flex gap-2">
-          <BookOpen />
-          <span>My Uni</span>
-        </Link>
-      </div>
+      <AuthHeader
+        title="Welcome To Myuni"
+        subtitle="Please Enter Your Details"
+      />
 
-      <div className="py-6 md:py-20 h-1/4 leading-10 tracking-wide">
-        <h1 className="text-3xl font-medium text-primary">Welcome To Myuni</h1>
-        <p className="text-neutral-500 dark:text-neutral-400">
-          Please Enter Your Details
-        </p>
-      </div>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-6">
           <div className="flex w-full gap-2">
@@ -206,16 +200,12 @@ export default function SignIn() {
           </div>
         </div>
       </form>
-      <div className="h-1/4 md:mt-11">
-        <p>
-          Already have an account ?{" "}
-          <Link to="/auth/sign-in">
-            <span className="border-b border-primary dark:border-primary">
-              Sign-in
-            </span>
-          </Link>
-        </p>
-      </div>
+      <AuthFooter
+        className="mt-7 flex items-end"
+        bottomText="Already have an account ?"
+        bottomLinkText="Sign-in"
+        bottomLinkTo="/auth/sign-in"
+      />
     </div>
   );
 }

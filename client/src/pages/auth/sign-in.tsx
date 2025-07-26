@@ -1,11 +1,13 @@
 "use client";
 
+import AuthFooter from "@/components/auth-footer";
+import AuthHeader from "@/components/auth-header";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { handleVisibleToggle, InputHandler } from "@/lib/utils";
 import axios from "axios";
-import { BookOpen, Eye, EyeOff, RotateCw } from "lucide-react";
+import { Eye, EyeOff, RotateCw } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
@@ -88,19 +90,7 @@ export default function SignIn() {
 
   return (
     <div className="w-full md:w-[75%] borde flex flex-col min-h-full">
-      <div className="h-1/4">
-        <Link to="/" className="flex gap-2">
-          <BookOpen />
-          <span>My Uni</span>
-        </Link>
-      </div>
-
-      <div className="py-6 md:py-20  h-1/4 leading-10 tracking-wide">
-        <h1 className="text-3xl font-medium text-primary">Welcome Back</h1>
-        <p className="text-neutral-500 dark:text-neutral-400">
-          Please Enter Your Details
-        </p>
-      </div>
+      <AuthHeader title="Welcome Back" subtitle="Please Enter Your Details" />
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-3">
@@ -136,7 +126,7 @@ export default function SignIn() {
               {showPassword ? <Eye /> : <EyeOff />}
             </Button>
 
-            <Link to="/auth/verify/forgot-password">
+            <Link to="/auth/forgot-password">
               <span className="absolute right-0 -bottom-6 border-b border-primary dark:border-primary">
                 forgot password ?
               </span>
@@ -161,16 +151,12 @@ export default function SignIn() {
           </div>
         </div>
       </form>
-      <div className="h-1/4  md:mt-32">
-        <p>
-          Don't have an account ?{" "}
-          <Link to="/auth/sign-up">
-            <span className="border-b border-primary dark:border-primary">
-              Sign-up
-            </span>
-          </Link>
-        </p>
-      </div>
+      <AuthFooter
+        className="h-[10%] mt-14 flex items-end md:mt-32"
+        bottomText="Don't have an account ? "
+        bottomLinkText="Sign-up"
+        bottomLinkTo="/auth/sign-up"
+      />
     </div>
   );
 }
